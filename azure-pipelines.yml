@@ -11,7 +11,6 @@ pool:
 
 variables:
   solution: '**/*.sln'
-  nugetConfiguration: '**/nuget.config'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -20,7 +19,9 @@ steps:
 
 - task: NuGetCommand@2
   inputs:
-    restoreSolution: '$(nugetConfiguration)'
+    restoreSolution: '$(solution)'
+    feedsToUse: 'config'
+    nugetConfigPath: 'nuget.config'
 
 - task: VSBuild@1
   inputs:
