@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <RootNamespace>Xtrimmer.KeyStoreProvider.Certificate</RootNamespace>
+    <AssemblyName>Xtrimmer.CertificateKeyStoreProvider</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Jeff Trimmer</Authors>
+    <Description>The implementation of the Microsoft.Data.Encryption.Cryptography.EncryptionKeyStoreProvider for Windows Certificate Store. This package enables using certificates stored in the Windows Certificate Store as key encryption keys.</Description>
+    <PackageProjectUrl>https://github.com/Xtrimmer/EncryptionCertificateStoreProvider</PackageProjectUrl>
+    <PackageTags>Microsoft.Data.Encryption.Cryptography EncryptionKeyStoreProvider</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/Xtrimmer/EncryptionCertificateStoreProvider</RepositoryUrl>
+    <PackageId>Xtrimmer.KeyStoreProvider.Certificate</PackageId>
+    <Product>Xtrimmer.KeyStoreProvider.Certificate</Product>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Encryption.Cryptography" Version="1.0.0-pre" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>Xtrimmer.EncryptionCertificateStoreProviderTests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+</Project>
