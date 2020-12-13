@@ -1,0 +1,75 @@
+
+[![Build Status](https://dev.azure.com/Xtrimmer/EncryptionCertificateStoreProvider/_apis/build/status/Xtrimmer.EncryptionCertificateStoreProvider?branchName=master)](https://dev.azure.com/Xtrimmer/EncryptionCertificateStoreProvider/_build/latest?definitionId=4&branchName=master)
+
+# Xtrimmer EncryptionCertificateStoreProvider
+Contributors:
+- Jeff Trimmer
+
+Xtrimmer SqlDatabaseBuilder is an implementation of the Microsoft.Data.Encryption.Cryptography.EncryptionKeyStoreProvider for Windows Certificate Store. 
+This package enables using certificates stored in the Windows Certificate Store as key encryption keys with the Microsoft.Data.Encryption.Cryptography library.
+
+# Certificate Store Provider Basics
+## Windows Certificate  Store
+Certificates can be stored in the following certificate stores:
+- **CurrentUser** - This type of certificate store is local to a user account on the computer. This certificate store is located in the registry under the HKEY_CURRENT_USER root.
+- **LocalMachine** - This type of certificate store is local to the computer and is global to all users on the computer. This certificate store is located in the registry under the HKEY_LOCAL_MACHINE root.
+For each system store location, the certificate will be placed in predefined systems stores, '*My*'.
+## Permissions for provisioning a certificate key encryption key
+- **LocalMachine** - you must have Read access to the certificate that is used as a key encryption key, or be the administrator on the computer.
+
+
+## Create a `KeyEncryptionKey` by generating a new certificate
+#### `CreateCertificateKeyEncryptionKey` Arguments
+- **subject** - Represents the distinguished name of the entity associated with the public key contained in the certificate.
+- **location** - Specifies the location of the certificate store.
+- **isEnclaveSupported** - Specifies that the key encryption key is enclave-enabled. You can share all data encryption keys, encrypted with the key encryption key, with a server-side secure enclave and use them for computations inside the enclave.
+
+```csharp
+    // Create a new KeyEncryptionKey by generating a new certificate in the CurrentUser location.
+    KeyEncryptionKey keyEncryptionKey = CertificateFactory.CreateCertificateKeyEncryptionKey(
+        subject: "My New Certificate", 
+        location: StoreLocation.CurrentUser, 
+        isEnclaveSupported: true
+    );
+
+    // Create a new ProtectedDataEncryptionKey protected by the newly created certificate KeyEncryptionKey.
+    DataEncryptionKey dataEncryptionKey = new ProtectedDataEncryptionKey("My new DEK", keyEncryptionKey);
+
+    // Use the new ProtectedDataEncryptionKey to encrypt and decrypt information.
+    string plaintext = "Hello World!";
+    byte[] ciphertext = plaintext.Encrypt(dataEncryptionKey);
+    string originalPlaintext = ciphertext.Decrypt<string>(dataEncryptionKey); 
+```
+
+## Create a `KeyEncryptionKey` by loading an existing certificate
+#### `KeyEncryptionKey` Arguments:
+- **name** - The name of the key encryption key. This can be any string and will be used to identify the key in encryption metadata.
+- **path** - The path of the key in the windows certificate store. 
+
+    Key path format: ***CertificateStoreName/CertificateStoreLocation/CertificateThumbprint***
+    
+    Examples:
+    ```
+    CurrentUser/My/BBF037EC4A133ADCA89FFAEC16CA5BFA8878FB94
+    LocalMachine/My/CA5BFA8878FB94BBF037EC4A133ADCA89FFAEC16
+    ``` 
+- **keyStoreProvider** - A key store provider is a client-side software component that holds a key store that has the key encryption key.
+- **isEnclaveSupported** - Specifies that the key encryption key is enclave-enabled. You can share all data encryption keys, encrypted with the key encryption key, with a server-side secure enclave and use them for computations inside the enclave.
+
+```csharp
+    // Create a new KeyEncryptionKey by loading an existing certificate in the CurrentUser location.
+    KeyEncryptionKey keyEncryptionKey = new KeyEncryptionKey(
+        name: "My New KEK", 
+        path: "CurrentUser/My/BBF037EC4A133ADCA89FFAEC16CA5BFA8878FB94", 
+        keyStoreProvider: new CertificateKeyStoreProvider(), 
+        isEnclaveSupported: true
+    );
+
+    // Create a new ProtectedDataEncryptionKey protected by the certificate KeyEncryptionKey.
+    DataEncryptionKey dataEncryptionKey = new ProtectedDataEncryptionKey(name: "My new DEK", keyEncryptionKey);
+
+    // Use the new ProtectedDataEncryptionKey to encrypt and decrypt information.
+    string plaintext = "Hello World!";
+    byte[] ciphertext = plaintext.Encrypt(dataEncryptionKey);
+    string originalPlaintext = ciphertext.Decrypt<string>(dataEncryptionKey); 
+```

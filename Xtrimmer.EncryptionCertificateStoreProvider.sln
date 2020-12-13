@@ -1,15 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5211A2C8-D87A-4D6E-B024-47B803BBF48F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptionCertificateStoreProvider", "src\EncryptionCertificateStoreProvider\EncryptionCertificateStoreProvider.csproj", "{EBD93C60-F6A2-4F67-A1D4-98B9908A721E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EncryptionCertificateStoreProvider", "src\EncryptionCertificateStoreProvider\EncryptionCertificateStoreProvider.csproj", "{EBD93C60-F6A2-4F67-A1D4-98B9908A721E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8DC53CA5-8188-494F-A3E0-82EF27C97995}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncryptionCertificateStoreProviderTests", "tests\EncryptionCertificateStoreProviderTests\EncryptionCertificateStoreProviderTests.csproj", "{5CBA8F8B-601D-4ADA-AF26-C8118B8B388D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EncryptionCertificateStoreProviderTests", "tests\EncryptionCertificateStoreProviderTests\EncryptionCertificateStoreProviderTests.csproj", "{5CBA8F8B-601D-4ADA-AF26-C8118B8B388D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F91B55A1-8011-45DC-83CA-9A2337DF391A}"
+	ProjectSection(SolutionItems) = preProject
+		nuget.config = nuget.config
+		README.MD = README.MD
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,9 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{EBD93C60-F6A2-4F67-A1D4-98B9908A721E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -49,8 +52,14 @@ Global
 		{5CBA8F8B-601D-4ADA-AF26-C8118B8B388D}.Release|x86.ActiveCfg = Release|Any CPU
 		{5CBA8F8B-601D-4ADA-AF26-C8118B8B388D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EBD93C60-F6A2-4F67-A1D4-98B9908A721E} = {5211A2C8-D87A-4D6E-B024-47B803BBF48F}
 		{5CBA8F8B-601D-4ADA-AF26-C8118B8B388D} = {8DC53CA5-8188-494F-A3E0-82EF27C97995}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D48B6A31-3F3F-4A2F-8B58-AC4D1D11C194}
 	EndGlobalSection
 EndGlobal
