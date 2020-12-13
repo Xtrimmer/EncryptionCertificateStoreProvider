@@ -9,10 +9,11 @@ Xtrimmer SqlDatabaseBuilder is an implementation of the Microsoft.Data.Encryptio
 This package enables using certificates stored in the Windows Certificate Store as key encryption keys with the Microsoft.Data.Encryption.Cryptography library.
 
 # Certificate Store Provider Basics
-## Windows Certificate  Store
-Certificates can be stored in the following certificate stores:
+## Windows Certificate  Store Locations
+Certificates can be stored in the following certificate store locations:
 - **CurrentUser** - This type of certificate store is local to a user account on the computer. This certificate store is located in the registry under the HKEY_CURRENT_USER root.
 - **LocalMachine** - This type of certificate store is local to the computer and is global to all users on the computer. This certificate store is located in the registry under the HKEY_LOCAL_MACHINE root.
+
 For each system store location, the certificate will be placed in predefined systems stores, '*My*'.
 ## Permissions for provisioning a certificate key encryption key
 - **LocalMachine** - you must have Read access to the certificate that is used as a key encryption key, or be the administrator on the computer.
