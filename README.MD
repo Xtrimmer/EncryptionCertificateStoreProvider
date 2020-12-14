@@ -47,7 +47,7 @@ For each system store location, the certificate will be placed in predefined sys
 - **name** - The name of the key encryption key. This can be any string and will be used to identify the key in encryption metadata.
 - **path** - The path of the key in the windows certificate store. 
 
-    Key path format: ***CertificateStoreName/CertificateStoreLocation/CertificateThumbprint***
+    Key path format: ***CertificateStoreLocation/CertificateStoreName/CertificateThumbprint***
     
     Examples:
     ```
