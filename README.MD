@@ -5,7 +5,7 @@
 Contributors:
 - Jeff Trimmer
 
-Xtrimmer SqlDatabaseBuilder is an implementation of the Microsoft.Data.Encryption.Cryptography.EncryptionKeyStoreProvider for Windows Certificate Store. 
+Xtrimmer EncryptionCertificateStoreProvider is an implementation of the Microsoft.Data.Encryption.Cryptography.EncryptionKeyStoreProvider for Windows Certificate Store. 
 This package enables using certificates stored in the Windows Certificate Store as key encryption keys with the Microsoft.Data.Encryption.Cryptography library.
 
 # Certificate Store Provider Basics
