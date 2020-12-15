@@ -61,6 +61,15 @@ namespace Xtrimmer.KeyStoreProvider.Certificate.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Certificate with thumbprint &apos;{0}&apos; not found in certificate store &apos;{1}&apos; in certificate location &apos;{2}&apos;;. Verify the certificate path in the key encryption key definition is correct, and the certificate has been imported correctly into the certificate location/store..
+        /// </summary>
+        internal static string CertificateNotFound {
+            get {
+                return ResourceManager.GetString("CertificateNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The key encryption key Id exceeds the maximum length of {0}..
         /// </summary>
         internal static string CertificatePathLengthTooLong {
@@ -79,11 +88,29 @@ namespace Xtrimmer.KeyStoreProvider.Certificate.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Certificate specified in key path {0} does not have a private key to decrypt a column encryption key. Verify the certificate is imported correctly..
+        /// </summary>
+        internal static string CertificateWithoutPrivateKey {
+            get {
+                return ResourceManager.GetString("CertificateWithoutPrivateKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The parameter {0} cannot be empty..
         /// </summary>
         internal static string EmptySequence {
             get {
                 return ResourceManager.GetString("EmptySequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified encrypted data encryption key signature does not match the signature computed with the key encryption key (asymmetric key) in &apos;{0}&apos;. The encrypted data encryption key may be corrupt, or the specified path may be incorrect..
+        /// </summary>
+        internal static string InvalidSignature {
+            get {
+                return ResourceManager.GetString("InvalidSignature", resourceCulture);
             }
         }
         
@@ -129,6 +156,24 @@ namespace Xtrimmer.KeyStoreProvider.Certificate.Properties {
         internal static string SequenceGreaterThanSize {
             get {
                 return ResourceManager.GetString("SequenceGreaterThanSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified encrypted data encryption key&apos;s ciphertext length: {0} does not match the ciphertext length: {1} when using the key encryption key (certificate) in &apos;{2}&apos;. The encrypted data encryption key may be corrupt, or the specified certificate path may be incorrect..
+        /// </summary>
+        internal static string UnexpectedCiphertextLength {
+            get {
+                return ResourceManager.GetString("UnexpectedCiphertextLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified encrypted data encryption key&apos;s signature length: {0} does not match the signature length: {1} when using the key encryption key (certificate) in &apos;{2}&apos;. The encrypted data encryption key may be corrupt, or the specified certificate path may be incorrect..
+        /// </summary>
+        internal static string UnexpectedSignatureLength {
+            get {
+                return ResourceManager.GetString("UnexpectedSignatureLength", resourceCulture);
             }
         }
         

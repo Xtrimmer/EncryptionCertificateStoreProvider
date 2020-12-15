@@ -46,31 +46,7 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
         {
             if (KeyEncryptionKey != null)
             {
-                string[] pathParts = KeyEncryptionKey.Path.Split('/');
-
-                if (pathParts.Length > 0)
-                {
-                    string thumbprint = pathParts[pathParts.Length - 1];
-                    using (X509Store certificateStore = new X509Store(StoreName.My, StoreLocation.CurrentUser))
-                    {
-                        certificateStore.Open(OpenFlags.MaxAllowed);
-                        X509Certificate2Collection matchingCertificates = certificateStore.Certificates.Find(X509FindType.FindByThumbprint, thumbprint, false);
-
-                        if (matchingCertificates.Count > 0)
-                        {
-                            foreach (X509Certificate2 certificate in matchingCertificates)
-                            {
-                                if (certificate.Subject == $"CN={TestCertName}")
-                                {
-                                    certificateStore.Remove(certificate);
-                                }
-                            }
-                        }
-
-                        certificateStore.Close();
-                    }
-                }
-
+                TestHelpers.RemoveCertificate(KeyEncryptionKey.Path);
                 KeyEncryptionKey = null;
             }
         }

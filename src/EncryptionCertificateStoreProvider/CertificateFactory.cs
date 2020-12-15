@@ -11,7 +11,7 @@ namespace Xtrimmer.KeyStoreProvider.Certificate
         {
             subject.ValidateNotNullOrWhitespace(nameof(subject));
 
-            const string KeyContainerName = "Xtrimmer.";
+            const string KeyContainerName = "Xtrimmer.CertificateKeyStoreProvider";
             const string IPSecurityIkeIntermediate = "1.3.6.1.5.5.8.2.2";
             const string KeyRecovery = "1.3.6.1.4.1.311.10.3.11";
 

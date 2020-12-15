@@ -47,17 +47,16 @@ namespace Xtrimmer.KeyStoreProvider.Certificate
 
                 short keyPathLength = BitConverter.ToInt16(encryptedKey, EncryptionKeyIdLengthIndex);
                 int ciphertextLength = BitConverter.ToInt16(encryptedKey, CipherTextLengthIndex);
-                ValidateCiphertextLength(keySizeInBytes, ciphertextLength);
+                ValidateCiphertextLength(keySizeInBytes, ciphertextLength, encryptionKeyId);
 
                 int ciphertextIndex = KeyPathIndex + keyPathLength;
                 int signatureIndex = ciphertextIndex + ciphertextLength;
                 int signatureLength = encryptedKey.Length - signatureIndex;
-                ValidateSignatureLength(keySizeInBytes, signatureLength);
+                ValidateSignatureLength(keySizeInBytes, signatureLength, encryptionKeyId);
 
                 IEnumerable<byte> ciphertext = encryptedKey.Skip(ciphertextIndex).Take(ciphertextLength);
-                IEnumerable<byte> signature = encryptedKey.Skip(signatureIndex).Take(signatureLength);
 
-                ValidateSignature(encryptedKey, certificate, signatureIndex, signature);
+                ValidateSignature(encryptedKey, certificate, signatureIndex, encryptionKeyId);
 
                 return Unwrap(ciphertext, certificate);
             }
@@ -258,7 +257,7 @@ namespace Xtrimmer.KeyStoreProvider.Certificate
         {
             if (matchingCertificates == null || matchingCertificates.Count == 0)
             {
-                throw new ArgumentException($"Certificate with thumbprint '{thumbprint}' not found in certificate store '{storeName}' in certificate location '{storeLocation}';. Verify the certificate path in the key encryption key definition is correct, and the certificate has been imported correctly into the certificate location/store.");
+                throw new ArgumentException(CertificateNotFound.Format(thumbprint, storeName, storeLocation));
             }
         }
 
@@ -266,7 +265,7 @@ namespace Xtrimmer.KeyStoreProvider.Certificate
         {
             if (!certificate.HasPrivateKey)
             {
-                throw new ArgumentException($"Certificate specified in key path {encryptionKeyId} does not have a private key to decrypt a column encryption key. Verify the certificate is imported correctly.");
+                throw new ArgumentException(CertificateWithoutPrivateKey.Format(encryptionKeyId));
             }
         }
 
@@ -308,29 +307,29 @@ namespace Xtrimmer.KeyStoreProvider.Certificate
             }
         }
 
-        private static void ValidateCiphertextLength(int keySizeInBytes, int cipherTextLength)
+        private static void ValidateCiphertextLength(int keySizeInBytes, int cipherTextLength, string encryptionKeyId)
         {
             if (cipherTextLength != keySizeInBytes)
             {
-                throw new ArgumentException("The specified encrypted data encryption key's ciphertext length is unexpected.");
+                throw new ArgumentException(UnexpectedCiphertextLength.Format(cipherTextLength, keySizeInBytes, encryptionKeyId));
             }
         }
 
-        private static void ValidateSignatureLength(int keySizeInBytes, int signatureLength)
+        private static void ValidateSignatureLength(int keySizeInBytes, int signatureLength, string encryptionKeyId)
         {
             if (signatureLength != keySizeInBytes)
             {
-                throw new ArgumentException("The specified encrypted data encryption key's signature length is unexpected.");
+                throw new ArgumentException(UnexpectedSignatureLength.Format(signatureLength, keySizeInBytes, encryptionKeyId));
             }
         }
 
-        private void ValidateSignature(byte[] encryptedKey, X509Certificate2 certificate, int signatureIndex, IEnumerable<byte> signature)
+        private void ValidateSignature(IEnumerable<byte> encryptedKey, X509Certificate2 certificate, int signatureIndex, string encryptionKeyId)
         {
             byte[] hash = ComputeSha256Hash(encryptedKey.Take(signatureIndex).ToArray());
 
-            if (!VerifySignature(hash, signature, certificate))
+            if (!VerifySignature(hash, encryptedKey.Skip(signatureIndex).ToArray(), certificate))
             {
-                throw new CryptographicException("Invalid signature.");
+                throw new ArgumentException(InvalidSignature.Format(encryptionKeyId));
             }
         }
 
