@@ -1,12 +1,20 @@
 
 [![Build Status](https://dev.azure.com/Xtrimmer/EncryptionCertificateStoreProvider/_apis/build/status/Xtrimmer.EncryptionCertificateStoreProvider?branchName=master)](https://dev.azure.com/Xtrimmer/EncryptionCertificateStoreProvider/_build/latest?definitionId=4&branchName=master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Xtrimmer_EncryptionCertificateStoreProvider&metric=alert_status)](https://sonarcloud.io/dashboard?id=Xtrimmer_EncryptionCertificateStoreProvider)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Xtrimmer_EncryptionCertificateStoreProvider&metric=coverage)](https://sonarcloud.io/dashboard?id=Xtrimmer_EncryptionCertificateStoreProvider)  
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Xtrimmer_EncryptionCertificateStoreProvider&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=Xtrimmer_EncryptionCertificateStoreProvider)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Xtrimmer_EncryptionCertificateStoreProvider&metric=bugs)](https://sonarcloud.io/dashboard?id=Xtrimmer_EncryptionCertificateStoreProvider)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Xtrimmer_EncryptionCertificateStoreProvider&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=Xtrimmer_EncryptionCertificateStoreProvider)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Xtrimmer_EncryptionCertificateStoreProvider&metric=code_smells)](https://sonarcloud.io/dashboard?id=Xtrimmer_EncryptionCertificateStoreProvider)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Xtrimmer_EncryptionCertificateStoreProvider&metric=security_rating)](https://sonarcloud.io/dashboard?id=Xtrimmer_EncryptionCertificateStoreProvider)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Xtrimmer_EncryptionCertificateStoreProvider&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=Xtrimmer_EncryptionCertificateStoreProvider)  
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Xtrimmer_EncryptionCertificateStoreProvider&metric=ncloc)](https://sonarcloud.io/dashboard?id=Xtrimmer_EncryptionCertificateStoreProvider)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=Xtrimmer_EncryptionCertificateStoreProvider&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=Xtrimmer_EncryptionCertificateStoreProvider)
 
-# Xtrimmer EncryptionCertificateStoreProvider
-Contributors:
-- Jeff Trimmer
+# EncryptionCertificateStoreProvider
 
-Xtrimmer EncryptionCertificateStoreProvider is an implementation of the Microsoft.Data.Encryption.Cryptography.EncryptionKeyStoreProvider for Windows Certificate Store. 
-This package enables using certificates stored in the Windows Certificate Store as key encryption keys with the Microsoft.Data.Encryption.Cryptography library.
+`EncryptionCertificateStoreProvider` is an implementation of the ***Microsoft.Data.Encryption.Cryptography.EncryptionKeyStoreProvider*** for Windows Certificate Store. 
+This package enables using certificates stored in the Windows Certificate Store as key encryption keys with the ***Microsoft.Data.Encryption.Cryptography*** library.
 
 # Certificate Store Provider Basics
 ## Windows Certificate  Store Locations
