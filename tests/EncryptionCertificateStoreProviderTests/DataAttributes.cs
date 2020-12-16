@@ -18,5 +18,13 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
                 yield return new object[] { "     " };
             }
         }
+        public class UnsupportedCertificatePathDataAttribute : DataAttribute
+        {
+            public override IEnumerable<object[]> GetData(MethodInfo testMethod)
+            {
+                yield return new object[] { "CurrentUser/UnsupportedName/F00D" };
+                yield return new object[] { "UnsupportedName/F00D" };
+            }
+        }
     }
 }

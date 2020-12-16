@@ -69,6 +69,32 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
             }
         }
 
+        [Fact]
+        public void WorkWithTwoPartCertificatePath()
+        {
+            string path = null;
+            byte[] plaintextKey = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 };
+            EncryptionKeyStoreProvider provider = new CertificateKeyStoreProvider();
+
+            try
+            {
+                path = string.Join("/", TestHelpers.CreateCertificate(
+                    subject: $"{nameof(WorkWithTwoPartCertificatePath)}_TestCertificate",
+                    storeLocation: StoreLocation.LocalMachine,
+                    keySizeInBits: 2048
+                ).Split('/').Skip(1));
+
+                byte[] wrappedKey = provider.WrapKey(path, RSA_OAEP, plaintextKey);
+                byte[] unwrappedPlaintextKey = provider.UnwrapKey(path, RSA_OAEP, wrappedKey);
+
+                Assert.Equal(expected: plaintextKey, actual: unwrappedPlaintextKey);
+            }
+            finally
+            {
+                TestHelpers.RemoveCertificate(path);
+            }
+        }
+
         #region UnwrapKey Error Condition Tests
 
         [Theory]
@@ -136,12 +162,13 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
             Assert.Contains(UnsupportedCertificateStoreLocation, ex.Message);
         }
 
-        [Fact]
-        public void ThrowWhenUnwrapKeyCalledWhenCertificatePathHasUnsupportedName()
+        [Theory]
+        [DataAttributes.UnsupportedCertificatePathData]
+        public void ThrowWhenUnwrapKeyCalledWhenCertificatePathHasUnsupportedName(string path)
         {
             EncryptionKeyStoreProvider provider = new CertificateKeyStoreProvider();
 
-            Exception ex = Assert.Throws<ArgumentException>(() => provider.UnwrapKey("CurrentUser/UnsupportedName/F00D", RSA_OAEP, new byte[] { 1, 2, 3, 4, 5 }));
+            Exception ex = Assert.Throws<ArgumentException>(() => provider.UnwrapKey(path, RSA_OAEP, new byte[] { 1, 2, 3, 4, 5 }));
             Assert.Contains(UnsupportedCertificateStoreName, ex.Message);
         }
 
@@ -328,12 +355,13 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
             Assert.Contains(UnsupportedCertificateStoreLocation, ex.Message);
         }
 
-        [Fact]
-        public void ThrowWhenWrapKeyCalledWhenCertificatePathHasUnsupportedName()
+        [Theory]
+        [DataAttributes.UnsupportedCertificatePathData]
+        public void ThrowWhenWrapKeyCalledWhenCertificatePathHasUnsupportedName(string path)
         {
             EncryptionKeyStoreProvider provider = new CertificateKeyStoreProvider();
 
-            Exception ex = Assert.Throws<ArgumentException>(() => provider.WrapKey("CurrentUser/UnsupportedName/F00D", RSA_OAEP, new byte[] { 1, 2, 3, 4, 5 }));
+            Exception ex = Assert.Throws<ArgumentException>(() => provider.WrapKey(path, RSA_OAEP, new byte[] { 1, 2, 3, 4, 5 }));
             Assert.Contains(UnsupportedCertificateStoreName, ex.Message);
         }
 
@@ -419,12 +447,13 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
             Assert.Contains(UnsupportedCertificateStoreLocation, ex.Message);
         }
 
-        [Fact]
-        public void ThrowWhenSignCalledWhenCertificatePathHasUnsupportedName()
+        [Theory]
+        [DataAttributes.UnsupportedCertificatePathData]
+        public void ThrowWhenSignCalledWhenCertificatePathHasUnsupportedName(string path)
         {
             EncryptionKeyStoreProvider provider = new CertificateKeyStoreProvider();
 
-            Exception ex = Assert.Throws<ArgumentException>(() => provider.Sign("CurrentUser/UnsupportedName/F00D", allowEnclaveComputations: true));
+            Exception ex = Assert.Throws<ArgumentException>(() => provider.Sign(path, allowEnclaveComputations: true));
             Assert.Contains(UnsupportedCertificateStoreName, ex.Message);
         }
 
@@ -528,12 +557,13 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
             Assert.Contains(UnsupportedCertificateStoreLocation, ex.Message);
         }
 
-        [Fact]
-        public void ThrowWhenVerifyCalledWhenCertificatePathHasUnsupportedName()
+        [Theory]
+        [DataAttributes.UnsupportedCertificatePathData]
+        public void ThrowWhenVerifyCalledWhenCertificatePathHasUnsupportedName(string path)
         {
             EncryptionKeyStoreProvider provider = new CertificateKeyStoreProvider();
 
-            Exception ex = Assert.Throws<ArgumentException>(() => provider.Verify("CurrentUser/UnsupportedName/F00D", allowEnclaveComputations: true, new byte[] { 1, 2, 3, 4, 5 }));
+            Exception ex = Assert.Throws<ArgumentException>(() => provider.Verify(path, allowEnclaveComputations: true, new byte[] { 1, 2, 3, 4, 5 }));
             Assert.Contains(UnsupportedCertificateStoreName, ex.Message);
         }
 
