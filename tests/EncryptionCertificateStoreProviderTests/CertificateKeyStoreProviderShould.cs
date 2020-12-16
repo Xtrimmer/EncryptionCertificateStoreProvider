@@ -1,12 +1,12 @@
-﻿using Microsoft.Data.Encryption.Cryptography;
-using System;
-using Xunit;
-using Xtrimmer.KeyStoreProvider.Certificate;
-using static Microsoft.Data.Encryption.Cryptography.KeyEncryptionKeyAlgorithm;
+﻿using System;
 using System.Linq;
-
-using static Xtrimmer.KeyStoreProvider.Certificate.Properties.Resources;
 using System.Security.Cryptography.X509Certificates;
+using Xunit;
+using Microsoft.Data.Encryption.Cryptography;
+using Xtrimmer.KeyStoreProvider.Certificate;
+
+using static Microsoft.Data.Encryption.Cryptography.KeyEncryptionKeyAlgorithm;
+using static Xtrimmer.KeyStoreProvider.Certificate.Properties.Resources;
 
 namespace Xtrimmer.EncryptionCertificateStoreProviderTests
 {
@@ -27,7 +27,7 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
             try
             {
                 path = TestHelpers.CreateCertificate(
-                    subject: $"{nameof(ThrowWhenUnwrapKeyCalledWhenSignatureIsInvalid)}_TestCertificate",
+                    subject: $"{nameof(WrapAndUnwrapKeyCorrectly)}_TestCertificate",
                     storeLocation: StoreLocation.CurrentUser,
                     keySizeInBits: keySizeInBits
                 );
@@ -54,7 +54,7 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
             try
             {
                 path = TestHelpers.CreateCertificate(
-                    subject: $"{nameof(ThrowWhenUnwrapKeyCalledWhenSignatureIsInvalid)}_TestCertificate",
+                    subject: $"{nameof(SignAndVerifyCorrectly)}_TestCertificate",
                     storeLocation: StoreLocation.CurrentUser
                 );
 
@@ -398,7 +398,7 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
 
             try
             {
-                path = TestHelpers.CreateCertificate($"{nameof(ThrowWhenUnwrapKeyCalledWhenCertificateHasNoPrivateKey)}_TestCertificate", StoreLocation.CurrentUser, hasPrivateKey: false);
+                path = TestHelpers.CreateCertificate($"{nameof(ThrowWhenWrapKeyCalledWhenCertificateHasNoPrivateKey)}_TestCertificate", StoreLocation.CurrentUser, hasPrivateKey: false);
 
                 Exception ex = Assert.Throws<ArgumentException>(() => provider.WrapKey(path, RSA_OAEP, new byte[] { 1, 2, 3, 4, 5 }));
                 Assert.Contains(CertificateWithoutPrivateKey.Format(path), ex.Message);
@@ -490,7 +490,7 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
 
             try
             {
-                path = TestHelpers.CreateCertificate($"{nameof(ThrowWhenUnwrapKeyCalledWhenCertificateHasNoPrivateKey)}_TestCertificate", StoreLocation.CurrentUser, hasPrivateKey: false);
+                path = TestHelpers.CreateCertificate($"{nameof(ThrowWhenSignCalledWhenCertificateHasNoPrivateKey)}_TestCertificate", StoreLocation.CurrentUser, hasPrivateKey: false);
 
                 Exception ex = Assert.Throws<ArgumentException>(() => provider.Sign(path, allowEnclaveComputations: true));
                 Assert.Contains(CertificateWithoutPrivateKey.Format(path), ex.Message);
@@ -600,7 +600,7 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
 
             try
             {
-                path = TestHelpers.CreateCertificate($"{nameof(ThrowWhenUnwrapKeyCalledWhenCertificateHasNoPrivateKey)}_TestCertificate", StoreLocation.CurrentUser, hasPrivateKey: false);
+                path = TestHelpers.CreateCertificate($"{nameof(ThrowWhenVerifyCalledWhenCertificateHasNoPrivateKey)}_TestCertificate", StoreLocation.CurrentUser, hasPrivateKey: false);
 
                 Exception ex = Assert.Throws<ArgumentException>(() => provider.Verify(path, allowEnclaveComputations: true, new byte[] { 1, 2, 3, 4, 5 }));
                 Assert.Contains(CertificateWithoutPrivateKey.Format(path), ex.Message);
