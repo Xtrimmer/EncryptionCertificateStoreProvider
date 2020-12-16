@@ -69,6 +69,10 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
             }
         }
 
+        /// <summary>
+        /// This test requires elevated privelages to access the StoreLocation.LocalMachine.
+        /// Without, it will fail with "CryptographicException: Access denied."
+        /// </summary>
         [Fact]
         public void WorkWithTwoPartCertificatePath()
         {
