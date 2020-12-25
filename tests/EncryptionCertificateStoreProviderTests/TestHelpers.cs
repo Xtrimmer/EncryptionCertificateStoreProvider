@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Xtrimmer.KeyStoreProvider.Certificate;
@@ -24,7 +23,7 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
             const string IPSecurityIkeIntermediate = "1.3.6.1.5.5.8.2.2";
             const string KeyRecovery = "1.3.6.1.4.1.311.10.3.11";
 
-            CspParameters cspParameters = new CspParameters { KeyContainerName = KeyContainerName };
+            CspParameters cspParameters = hasPrivateKey ? new CspParameters { KeyContainerName = KeyContainerName } : new CspParameters();
 
             using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(keySizeInBits, cspParameters))
             {
@@ -48,11 +47,6 @@ namespace Xtrimmer.EncryptionCertificateStoreProviderTests
                     DateTimeOffset.UtcNow.AddDays(1460)
                 ))
                 {
-                    if (!hasPrivateKey)
-                    {
-                        certificate.PrivateKey = null;
-                    }
-
                     X509Store store = new X509Store(StoreName.My, storeLocation);
                     store.Open(OpenFlags.MaxAllowed);
                     store.Add(certificate);

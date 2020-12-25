@@ -39,7 +39,6 @@ namespace Xtrimmer.KeyStoreProvider.Certificate
                     DateTimeOffset.UtcNow.AddDays(1460)
                 ))
                 {
-                    certificate.PrivateKey = rsa;
                     X509Store store = new X509Store(StoreName.My, location);
                     store.Open(OpenFlags.MaxAllowed);
                     store.Add(certificate);
