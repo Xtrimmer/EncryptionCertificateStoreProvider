@@ -14,6 +14,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   projectFolder: '$(Build.Repository.LocalPath)\src\EncryptionCertificateStoreProvider'
+  testFolder: '$(Build.Repository.LocalPath)\tests\EncryptionCertificateStoreProviderTests'
 
 steps:
 
@@ -29,6 +30,8 @@ steps:
     script: |
       Write-Host "Copying strong name signing certificate to project directory '$(projectFolder)'..."
       Copy-Item $(strongNameSigningCert.secureFilePath) -Destination $(projectFolder)
+      Write-Host "Copying strong name signing certificate to test directory '$(testFolder)'..."
+      Copy-Item $(strongNameSigningCert.secureFilePath) -Destination $(testFolder)
 
 - task: NuGetToolInstaller@1
 
