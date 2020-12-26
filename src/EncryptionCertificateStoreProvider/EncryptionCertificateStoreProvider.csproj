@@ -45,7 +45,7 @@
 
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-      <_Parameter1>Xtrimmer.EncryptionCertificateStoreProviderTests</_Parameter1>
+      <_Parameter1>Xtrimmer.EncryptionCertificateStoreProviderTests, PublicKey=00240000048000009400000006020000002400005253413100040000010001009960dc72b151d9fba72ddd9e6400c33a03302249577dff25da678db2555efaba8dfc60c7fa172d161ff926782cc25863488e860a91eb119ca6ce509151497f3b0fcdb496f429184134c555e3fc4dba7c0119180552156b1f8094042dd5de453b0c601665beff02575bbedf08ec637daf41b8bc483927ae26b00758bcb97cd2c2</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
 
