@@ -13,8 +13,23 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  projectFolder: '$(Build.Repository.LocalPath)\src\EncryptionCertificateStoreProvider'
 
 steps:
+
+- task: DownloadSecureFile@1
+  name: strongNameSigningCert
+  inputs:
+    secureFile: CertificateKeyStoreProvider.snk
+    retryCount: 5
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Copying strong name signing certificate to project directory '$(projectFolder)'..."
+      Copy-Item $(strongNameSigningCert.secureFilePath) -Destination $(projectFolder)
+
 - task: NuGetToolInstaller@1
 
 - task: NuGetCommand@2
