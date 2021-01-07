@@ -61,6 +61,11 @@ steps:
     configuration: '$(buildConfiguration)'
     codeCoverageEnabled: True
 
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: $(Build.SourcesDirectory)
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)' 
