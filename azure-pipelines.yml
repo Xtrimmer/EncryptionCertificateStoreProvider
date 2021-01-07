@@ -61,6 +61,10 @@ steps:
     configuration: '$(buildConfiguration)'
     codeCoverageEnabled: True
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+
 - task: SonarCloudAnalyze@1
 
 - task: SonarCloudPublish@1
