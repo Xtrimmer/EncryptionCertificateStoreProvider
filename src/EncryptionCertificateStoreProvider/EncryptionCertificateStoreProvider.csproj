@@ -13,6 +13,7 @@
     <RepositoryUrl>https://github.com/Xtrimmer/EncryptionCertificateStoreProvider</RepositoryUrl>
     <PackageId>Xtrimmer.KeyStoreProvider.Certificate</PackageId>
     <Product>Xtrimmer.KeyStoreProvider.Certificate</Product>
+    <Version>0.1.0-pre</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
