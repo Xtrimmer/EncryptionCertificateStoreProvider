@@ -61,9 +61,11 @@ steps:
     configuration: '$(buildConfiguration)'
     codeCoverageEnabled: True
 
-- task: DotNetCoreCLI@2
+- task: PublishBuildArtifacts@1
   inputs:
-    command: 'publish'
+    pathToPublish: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'drop' 
+    publishLocation: 'Container'
 
 - task: SonarCloudAnalyze@1
 
