@@ -1,4 +1,4 @@
-![Nuget](https://img.shields.io/nuget/v/Xtrimmer.KeyStoreProvider.Certificate)
+[![Nuget](https://img.shields.io/nuget/v/Xtrimmer.KeyStoreProvider.Certificate)](https://www.nuget.org/packages/Xtrimmer.KeyStoreProvider.Certificate/0.2.0-pre)
 [![Build Status](https://dev.azure.com/Xtrimmer/EncryptionCertificateStoreProvider/_apis/build/status/Xtrimmer.EncryptionCertificateStoreProvider?branchName=master)](https://dev.azure.com/Xtrimmer/EncryptionCertificateStoreProvider/_build/latest?definitionId=4&branchName=master)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Xtrimmer_EncryptionCertificateStoreProvider&metric=alert_status)](https://sonarcloud.io/dashboard?id=Xtrimmer_EncryptionCertificateStoreProvider)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Xtrimmer_EncryptionCertificateStoreProvider&metric=coverage)](https://sonarcloud.io/dashboard?id=Xtrimmer_EncryptionCertificateStoreProvider)  
