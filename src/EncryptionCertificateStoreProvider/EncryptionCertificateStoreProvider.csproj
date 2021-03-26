@@ -7,13 +7,14 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Jeff Trimmer</Authors>
     <Description>The implementation of the Microsoft.Data.Encryption.Cryptography.EncryptionKeyStoreProvider for Windows Certificate Store. This package enables using certificates stored in the Windows Certificate Store as key encryption keys.</Description>
+    <PackageReleaseNotes>Update Microsoft.Data.Encryption.Cryptography to version 0.2.0-pre</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/Xtrimmer/EncryptionCertificateStoreProvider</PackageProjectUrl>
     <PackageTags>Microsoft.Data.Encryption.Cryptography EncryptionKeyStoreProvider</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/Xtrimmer/EncryptionCertificateStoreProvider</RepositoryUrl>
     <PackageId>Xtrimmer.KeyStoreProvider.Certificate</PackageId>
     <Product>Xtrimmer.KeyStoreProvider.Certificate</Product>
-    <Version>0.1.0-pre</Version>
+    <Version>0.2.0-pre</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
